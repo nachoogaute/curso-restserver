@@ -1,11 +1,11 @@
 const jwt= require("jsonwebtoken")
-const Usuario = require("../models/usuarios")
+const Usuario = require("../models/usuario")
 
 
 
 
 
-const validatJWT= async(req,res,next)=>{
+const validarJWT= async(req,res,next)=>{
 
     const token= req.header("x-token")
 
@@ -50,5 +50,5 @@ const validatJWT= async(req,res,next)=>{
 
 
 module.exports={
-    validatJWT
+    validarJWT
 }

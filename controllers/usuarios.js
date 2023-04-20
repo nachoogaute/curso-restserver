@@ -1,5 +1,5 @@
 const{response, request}= require("express")
-const Usuario= require("../models/usuarios")
+const Usuario= require("../models/usuario")
 const bcryptjs= require("bcryptjs")
 const { emailExiste } = require("../helpers/db-validators")
 
@@ -9,6 +9,7 @@ const { emailExiste } = require("../helpers/db-validators")
 const usuariosGet=async(req= request, res= response)=> {
     //const {q, nombre="No name", apikey, page=1, limit}= req.query
     const{limite=5,desde=0}= req.query
+    const query= {estado:true}
 
 
     const[total,usuarios]=await Promise.all([
@@ -29,7 +30,7 @@ const usuariosGet=async(req= request, res= response)=> {
   const usuariosPut=async(req, res= response)=> {
 
     const {id}= req.params
-    const{_id, contraseña, google,correo, ...resto}= req.body
+    const{_id, contraseña, google, ...resto}= req.body
           //Validar contra base de datos
     if(contraseña){
 
@@ -91,11 +92,6 @@ const usuariosGet=async(req= request, res= response)=> {
 
 
   }
-  const usuariosPatch=(req, res= response)=> {
-    res.json({
-        msg: "patch API- controlador "
-    })
-  }
 
 
 
@@ -104,6 +100,5 @@ const usuariosGet=async(req= request, res= response)=> {
     usuariosGet,
     usuariosPut,
     usuariosPost,
-    usuariosDelete,
-    usuariosPatch
+    usuariosDelete
   }
